@@ -40,6 +40,7 @@ return {
         color_overrides = {
           mocha = {
             overlay2 = '#5d5469', -- things like comments
+            sky = '#0073ff', -- operators, like =
             mauve = '#f996fc', -- things like function() or return
             lavender = '#907ef3', -- things like lavender
           },
