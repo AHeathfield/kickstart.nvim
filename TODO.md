@@ -4,3 +4,5 @@
 - [X] customize the theme, I want the bg to be the same as my terminal
 - [ ] I don't like gcc to comment lines, i would prefer ctrl + '/'
 - [ ] I liked in NvChad setup when I had the option to open like a file tree (nice for adding/removing/deleting files)
+- [ ] The drop down on the suggestions from lsp look a lil funky, I think if I can make the bg of it a solid color not transparent it would look better, however its not a big deal
+- [ ] Add auto brace
