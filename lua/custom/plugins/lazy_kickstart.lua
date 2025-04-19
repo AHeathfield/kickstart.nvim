@@ -643,6 +643,11 @@ return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
+      -- ============================= AIDAN ADDED THIS =============================
+      -- SWITCHED TO nvim-autopairs, online people say its better
+      -- mini-pairs for auto pairing things like {} () [] "" ''
+      -- require('mini.pairs').setup()
+
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -715,8 +720,8 @@ return {
   -- require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
