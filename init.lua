@@ -99,6 +99,7 @@ vim.g.have_nerd_font = true
 --  For more options, you can see `:help option-list`
 
 -- ================================== AIDANS OPTS ==================================
+vim.opt.colorcolumn = '100'
 -- TAB SIZES
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
