@@ -57,12 +57,12 @@ return {
         dapui.eval(nil, { enter = true })
       end)
 
-      vim.keymap.set('n', '<F1>', dap.continue)
-      vim.keymap.set('n', '<F2>', dap.step_into)
-      vim.keymap.set('n', '<F3>', dap.step_over)
-      vim.keymap.set('n', '<F4>', dap.step_out)
-      vim.keymap.set('n', '<F5>', dap.step_back)
-      vim.keymap.set('n', '<F13>', dap.restart)
+      vim.keymap.set('n', '<F1>', dap.continue, { desc = 'Debugger Continue' })
+      vim.keymap.set('n', '<F2>', dap.step_into, { desc = 'Debugger Step Into' })
+      vim.keymap.set('n', '<F3>', dap.step_over, { desc = 'Debugger Step Over' })
+      vim.keymap.set('n', '<F4>', dap.step_out, { desc = 'Debugger Step Out' })
+      vim.keymap.set('n', '<F5>', dap.step_back, { desc = 'Debugger Step Back' })
+      vim.keymap.set('n', '<F6>', dap.restart, { desc = 'Debugger Restart' })
     end,
   },
 }
