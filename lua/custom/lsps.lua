@@ -2,6 +2,7 @@ return {
   clangd = {
     -- If need to configure here is link to info: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd
   },
+  marksman = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},

@@ -228,6 +228,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'cpp',
+  callback = function()
+    vim.cmd [[
+            " Align access specifiers to column 1
+            setlocal indentexpr=
+            setlocal indentkeys-=0#
+            setlocal indentkeys-=0;
+            setlocal indentkeys-=0}
+            setlocal indentkeys+=0public:
+            setlocal indentkeys+=0private:
+            setlocal indentkeys+=0protected:
+            setlocal cinoptions+=g0  " Place access specifiers at start of line
+        ]]
+  end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
