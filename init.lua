@@ -228,6 +228,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- This is a hard fix for indenting public, private, and protected to the very left in cpp files
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'cpp',
   callback = function()
@@ -242,6 +243,21 @@ vim.api.nvim_create_autocmd('FileType', {
             setlocal indentkeys+=0protected:
             setlocal cinoptions+=g0  " Place access specifiers at start of line
         ]]
+  end,
+})
+
+-- This is a hard fix for tabout for ** not working
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function()
+    vim.keymap.set('i', '<Tab>', function()
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      local char = vim.api.nvim_get_current_line():sub(col + 1, col + 1)
+      if char == '*' then
+        return '<Right>'
+      end
+      return '<Tab>'
+    end, { expr = true, buffer = true })
   end,
 })
 
