@@ -6,54 +6,37 @@ return {
   event = 'InsertEnter',
   opts = {},
   config = function()
-    local autopairs = require 'nvim-autopairs'
+    local npairs = require 'nvim-autopairs'
     local Rule = require 'nvim-autopairs.rule'
 
-    -- Basic setup
-    autopairs.setup {}
+    -- Setup autopairs
+    npairs.setup {}
 
-    -- Only add the rule for markdown files
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = 'markdown',
-      callback = function()
-        -- This adds * complete for italics and bold in markdown
-        autopairs.add_rule(Rule('*', '*'):with_pair(function(opts)
-          -- Get current cursor position
-          local cursor_line, _ = unpack(vim.api.nvim_win_get_cursor(0))
-          local buf_lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    -- Function to check if the cursor is inside a Markdown code block
+    local function in_markdown_code_block()
+      if vim.bo.filetype ~= 'markdown' then
+        return false
+      end
+      local line_num = vim.fn.line '.' - 1
+      local lines = vim.api.nvim_buf_get_lines(0, 0, line_num, false)
 
-          -- Check if we're inside a code block
-          local in_code_block = false
-          for i = 1, cursor_line do
-            local line = buf_lines[i]
-            if line:match '^```' then
-              in_code_block = not in_code_block -- Toggle state
-            end
-          end
+      local count = 0
+      for _, line in ipairs(lines) do
+        if line:match '^```' then
+          count = count + 1
+        end
+      end
 
-          -- Disable autopair if inside code block
-          return not in_code_block
-        end))
+      return count % 2 == 1 -- Inside block if odd number of ```
+    end
 
-        -- This adds == complete for markdown highlighting
-        autopairs.add_rule(Rule('==', '=='):with_pair(function(opts)
-          -- Get current cursor position
-          local cursor_line, _ = unpack(vim.api.nvim_win_get_cursor(0))
-          local buf_lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-
-          -- Check if we're inside a code block
-          local in_code_block = false
-          for i = 1, cursor_line do
-            local line = buf_lines[i]
-            if line:match '^```' then
-              in_code_block = not in_code_block -- Toggle state
-            end
-          end
-
-          -- Disable autopair if inside code block
-          return not in_code_block
-        end))
-      end,
-    })
+    npairs.add_rules {
+      Rule('*', '*', 'markdown'):with_pair(function()
+        return not in_markdown_code_block()
+      end),
+      Rule('==', '==', 'markdown'):with_pair(function()
+        return not in_markdown_code_block()
+      end),
+    }
   end,
 }
