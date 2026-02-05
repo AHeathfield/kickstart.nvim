@@ -3,7 +3,7 @@
 return {
 
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -219,6 +219,11 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      -- Shortcut for searching "ToDo" directory
+      vim.keymap.set('n', '<leader>st', function()
+        builtin.find_files { cwd = '~/Documents/TODO' }
+      end, { desc = '[S]earch [T]ODO files' })
     end,
   },
 
