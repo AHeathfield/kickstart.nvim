@@ -203,6 +203,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- ============================== AIDANS VIM KEYMAPS ==============================
+vim.keymap.set('i', '<C-l>', '<tab>', { desc = 'Insert a tab' })
 -- vim.keymap.set('i', '<C-h>', '<left>', { desc = 'Move cursor left in insert mode' })
 -- vim.keymap.set('i', '<C-j>', '<down>', { desc = 'Move cursor down in insert mode' })
 -- vim.keymap.set('i', '<C-k>', '<up>', { desc = 'Move cursor up in insert mode' })

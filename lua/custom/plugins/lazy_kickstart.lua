@@ -162,12 +162,20 @@ return {
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          file_ignore_patterns = {
+            '%.crt',
+            '%.key',
+            '%.pem',
+            '%.p12', -- Security files
+            '%.png',
+            '%.jpg',
+            '%.pdf', -- Binaries/Assets
+            'node_modules',
+            '.git/',
+            'target/', -- Folders
+          },
+        },
         pickers = {
           colorscheme = {
             enable_preview = true,
@@ -224,6 +232,11 @@ return {
       vim.keymap.set('n', '<leader>st', function()
         builtin.find_files { cwd = '~/Documents/TODO' }
       end, { desc = '[S]earch [T]ODO files' })
+
+      -- Shortcut for searching "nix-darwin" directory
+      vim.keymap.set('n', '<leader>sx', function()
+        builtin.find_files { cwd = '/etc/nix/' }
+      end, { desc = '[S]earch Ni[X] Darwin files' })
     end,
   },
 
@@ -691,10 +704,33 @@ return {
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    -- Add this line to create a custom path for parsers
+    -- init = function()
+    --   local parser_path = vim.fn.stdpath 'data' .. '/site'
+    --   vim.opt.runtimepath:prepend(parser_path)
+    -- end,
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      -- ADD THIS LINE: Tells TS to install parsers here instead of the Nix store
+      -- parser_install_dir = vim.fn.stdpath 'data' .. '/site',
+      ensure_installed = {
+        'bash',
+        'c',
+        'cpp',
+        'diff',
+        'gdscript',
+        'gdshader',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'zig',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
